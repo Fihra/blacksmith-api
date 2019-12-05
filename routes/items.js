@@ -38,5 +38,23 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.put('/:id', async (req, res) => {
+    try{
+        const updatedItem = await Item.updateOne({
+            _id: req.params.id}, {
+                $set: {
+                    name: req.body.name,
+                    type: req.body.type,
+                    price: req.body.price,
+                    material: req.body.material
+                }
+            }
+        );
+        res.json(updatedItem);
+    }catch(err){
+        res.json({message: err});
+    }
+})
+
 
 module.exports = router;
