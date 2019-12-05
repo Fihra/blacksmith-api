@@ -38,6 +38,7 @@ router.post('/', async (req, res) => {
     }
 })
 
+//Update Item
 router.put('/:id', async (req, res) => {
     try{
         const updatedItem = await Item.updateOne({
@@ -51,6 +52,16 @@ router.put('/:id', async (req, res) => {
             }
         );
         res.json(updatedItem);
+    }catch(err){
+        res.json({message: err});
+    }
+})
+
+// Delete Item
+router.delete('/:id', async (req, res) => {
+    try{
+        const deletedItem = await Item.remove({_id: req.params.id});
+        res.json(deletedItem);
     }catch(err){
         res.json({message: err});
     }
