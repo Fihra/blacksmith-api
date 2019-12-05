@@ -12,6 +12,16 @@ router.get('/', async (req, res) => {
     }
 });
 
+//Get One Item
+router.get('/:id', async (req, res) => {
+    try{
+        const item = await Item.findById(req.params.id);
+        res.json(item);
+    }catch(err){
+        res.json({message: err});
+    }
+})
+
 // Create New Item
 router.post('/', async (req, res) => {
     const item = new Item({
@@ -27,5 +37,6 @@ router.post('/', async (req, res) => {
         res.json({message: err});
     }
 })
+
 
 module.exports = router;
